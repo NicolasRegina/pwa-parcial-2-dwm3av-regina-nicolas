@@ -1,0 +1,473 @@
+@font-face {
+    font-family: 'MuseoSans';
+    src: url('../fonts/MuseoSans-100.otf') format('opentype');
+    src: url('../fonts/MuseoSans-300.otf') format('opentype');
+    src: url('../fonts/MuseoSans-500.otf') format('opentype');
+    src: url('../fonts/MuseoSans-700.otf') format('opentype');
+    font-weight: 100,300,500,700;
+    font-style: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'MuseoSans', sans-serif;
+    max-width: 1680px;
+    margin: auto;
+}
+
+header{
+    padding-bottom: 2rem;
+}
+
+h1 {
+    font-size: 0rem;
+    font-weight: 700;
+    text-align: center;
+    padding: 1rem;
+}	
+
+h2{
+    font-size: 2rem;
+    text-align: center;
+    font-weight: 700;
+    margin-top: 1rem;
+    margin: 1rem 0;
+}
+
+svg {
+    display: block;
+    margin-bottom: 2rem;
+}
+
+strong{
+    color: #9d8a45;
+}
+
+nav ul{
+	text-align: center;
+	padding: 10px;
+	display: flex;
+	justify-content: space-between;
+}
+
+nav li{
+	display: inline-block;
+	flex-basis: 20%;
+}
+
+nav a{
+	display: block;
+	text-decoration: none;
+	color: #9d8a45;
+	padding: 10px 0px;
+	margin: 0 20px;
+	border-radius: 2rem;
+	border: solid 2px #9d8a45;
+	font-size: 20px;
+}
+
+nav a:hover{
+	background-color: #FDE6E7;
+	animation:shadow-drop-center linear both;
+}
+
+body {
+    max-width: 1400px;
+    background-image: url(../img/fondo-mario.jpg);
+}
+
+.fondo{
+    background-color: rgba(255, 255, 255, 0.75);
+}
+
+.contenedor {
+    width: 100%;
+    background: #EA2222;
+    padding: .4em;
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 0;
+}
+  
+.contenedor-col {
+    width: 50%;
+}
+
+.contenedor-texto {
+    font-weight: 600;
+    color:white;
+    padding: 0.5rem;
+    margin: 0 1rem 0 0;
+}
+
+.contenedor-texto p {
+    font-size: 1.3rem;
+}
+
+/* SECTOR CARACTERÍSTICAS */
+
+.contenedor-col img{
+    padding: 1rem;
+    border-radius: 2rem;
+}
+
+.card-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.card{
+    border: 1px solid black;
+    margin: 50px auto;
+    width: 90%;
+    max-width: 360px;
+    padding: 30px 20px;
+    backdrop-filter: blur(10px);
+    border-radius: 1rem;
+    background-color: #01010B;
+}
+.card-title{
+    color: white;
+    font-size: 1.5rem;
+    text-align: center;
+    margin: 1rem 0;
+}
+.img-container{
+    width: 100%;
+    max-width: 300px;
+    /* margin: 0px auto 0px auto; */
+    color: white;
+}
+.img{
+    width: 100%;
+    /* height: 200px; */
+    text-align: center;
+}
+
+article .contenedor-texto{
+    margin: 1rem 0 0 0;
+}
+
+.card-container article {
+    flex-basis: calc(20% - 10px); /* Calculamos el ancho en base a 5 columnas (20% de ancho con 10px de espacio entre columnas) */
+    margin: 5px; /* Agregamos margen para el espacio entre elementos */
+    display: flex;
+    flex-direction: column;
+}
+
+/*SECTION MODOS*/
+
+#modos .contenedor{
+    width: 100%;
+    /* background: inherit; */
+    border: solid 2px #9d8a45;
+    padding: .4em;
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 0;
+}
+
+.grid-container p{
+    color: black;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1em;
+}
+
+.grid-container > div {
+    display: block;
+    padding: 20px;
+    border: solid 2px #9d8a45;
+    color: #fff;
+    background: #3175FF;
+    /* box-shadow: 2px 2px 10px rgba(0,0,0,.25); */
+}
+
+.grid-container img {
+    width: 100%;
+}
+
+/*SECTION JOY-CON*/
+
+.sec-joycon .contenedor{
+    background-color: #01010B;
+}
+
+.sec-joycon h2{
+    color: #9d8a45;
+}
+
+.sec-joycon .grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Dos columnas */
+    grid-gap: 1em;
+    padding: 10px;
+}
+
+/* Primera columna con dos divs uno encima del otro */
+.sec-joycon .grid-container > div:first-child {
+    grid-row: span 2; /* Ocupa dos filas */
+}
+
+.sec-joycon .grid-container > div:nth-child(2) {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.sec-joycon .grid-container > div {
+    color: inherit;
+    background: inherit;
+}
+
+/*SECTION JUEGOS*/
+
+.juegos .top{
+    display: flex;
+    background-color: #EA2222;
+    border-radius: 1rem 1rem 0 0;
+    padding: 1rem 0.5rem;
+    margin-bottom: 0;
+    width: 100%;
+}
+
+.top .card-title{
+    font-size: 1.3rem;
+    margin: inherit;
+}
+
+.juegos .img-container{
+    margin: 0;
+}
+
+.juegos span{
+    text-align: center;
+    margin: 2rem;
+    display: block;
+}
+
+/*SECTION CONTACTO*/
+
+.form-contacto{
+    margin: auto;
+    width: 90%;
+    max-width: 1000px;
+    background-image: linear-gradient(to left, rgba(255, 255, 255, 0.472), rgba(255, 255, 255, 0.365));
+    overflow: hidden;
+    padding: .7em;
+    border-radius: 1em;
+
+    display: grid;
+    grid-auto-rows: max-content;
+    grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+    gap: .6em;
+}
+
+.form-contacto img{
+    margin: auto;
+    width: 80%;
+    max-width: 60vw;
+}
+
+.contact{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5em;
+    padding: 3em .7em;
+    text-align: center;
+}
+
+.form_title{
+    display: grid;
+    justify-items: center;
+    gap: 1.5em;
+}
+
+.contact .contenedor-texto{
+    color: #01010B;
+}
+
+.contact_form{
+    display: grid;
+    justify-items: center;
+    gap: 1.5em;
+    width: 100%;
+}
+
+.input{
+    width: 80%;
+    max-width: 500px;
+    outline: none;
+    border: solid 2px #9d8a45;
+    padding: 1em;
+    font: inherit;
+    border-radius: .6em;
+    text-transform: uppercase;
+    width: 100%;
+}
+
+.send_input{
+    background-color: #EA2222;
+    color: #fff;
+    font-weight: 600;
+}
+
+/*SECTION NICOLAS - FOOTER*/
+
+.nico{
+    border-radius: 2rem;
+    border: solid 0.3rem #9d8a45;
+}
+
+.form-contacto ul li{
+	display: inline-block;
+}
+
+.form-contacto a{
+	text-decoration: none;
+	line-height: 35px;
+}
+
+.iconos{
+	padding: 25px;
+	background-repeat: no-repeat;
+	background-position: 10px center;
+	font-size:0px;
+}
+
+.linkedin{
+	background-image:url(../img/linkedin.png);
+}
+
+.mail{
+	background-image:url(../img/mail.png);
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+    /* Estilos para tabletas */
+    
+    nav a{
+        border: inherit;
+    }
+
+    .card-container article {
+        flex-basis: calc(33.33% - 10px); /* Calculamos el ancho en base a 3 columnas (33.33% de ancho con 10px de espacio entre columnas) */
+        margin: 5px; /* Agregamos margen para el espacio entre elementos */
+    }
+
+    .contenedor-col {
+        width: 100%;
+    }
+    .contenedor-col img {
+        width: 100%;
+        object-fit: cover;
+    }
+
+    .sec-joycon img{
+        display: none;
+    }
+
+    .sec-joycon .contenedor-col:first-child {
+        display: none;
+    }
+
+    .sec-joycon .contenedor-col:last-child {
+        text-align: center;
+        display: block;
+    }
+}
+
+@media screen and (min-width:320px) and (max-width: 767px) {
+    /* Estilos para dispositivos móviles */
+
+    nav ul {
+        padding: 0; /* Anula el relleno (padding) */
+        display: inherit;
+    }
+
+    nav li{
+        display: inherit;
+    }
+    nav a{
+        border: inherit;
+    }
+
+    .card-container article {
+        flex-basis: calc(100% - 10px); /* Calculamos el ancho en base a 1 columna (100% de ancho con 10px de espacio entre columnas) */
+        margin: 5px; /* Agregamos margen para el espacio entre elementos */
+    }
+
+    .contenedor {
+        padding-top: 0.5rem;
+        background: #EA2222;
+        padding: .4em;
+        border-radius: 6px;
+        overflow: hidden;
+        display: inherit;
+    }
+
+    .contenedor-col {
+        width: 100%;
+    }
+    .contenedor-col img {
+        width: 100%;
+        object-fit: cover;
+    }
+
+    .grid-container {
+        grid-template-columns: 1fr; /* Cambia a una sola columna */
+    }
+
+    .grid-container > div {
+        margin: 0;
+    }
+
+    .sec-joycon img{
+        display: none;
+    }
+
+    .sec-joycon .grid-container {
+        grid-template-columns: 1fr;
+    }
+
+    .sec-joycon .contenedor-col:first-child {
+        display: none;
+    }
+
+    .sec-joycon .contenedor-col:last-child {
+        text-align: center;
+        display: block;
+    }
+
+    /*acomoda las cajitas de cartuchos*/
+    .juegos .top{
+        margin: 0;
+        width: 18rem;
+    }
+
+    .juegos .top img{
+        display: none;
+    }
+
+    .juegos .card-container article{
+        flex-basis: calc(20% - 10px);
+    }
+}
+
+/*MEDIA QUERY PARA ACOMODAR JUEGOS*/
+@media screen and (min-width:320px) and (max-width: 379px) {
+    .juegos .top{
+        width: 15rem;
+    }
+}
