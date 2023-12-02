@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Inicio de Sesión</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Icono de la web -->
+	<link rel="shortcut icon" type="image/x-icon" href="icon.png">
+</head>
+<body>
+
+    <section class="form-contacto" id="app">
+    
+        <img src="img/mario_and_friends.png" alt="Mario y sus amigos saludando">
+
+        <div class="contact">
+
+            <h2 id="contacto" class="form_title">Inicie Sesión</h2>
+
+            <form id="loginForm" style="display: grid; justify-items: center; gap: 1.5em; width: 25rem;">
+
+                <input type="email" id="email" name="email" placeholder="Ingresa tu Email" class="input" required>
+            
+                <input type="password" id="password" placeholder="Ingresa tu Contraseña" class="input" required>
+                
+                <button class="input send_input" type="submit">Iniciar Sesión</button>
+
+            </form>
+
+        </div>
+
+    </section>
+
+    <!-- JS -->
+    <script type="module" src="home.js"></script>
+</body>
+</html>
