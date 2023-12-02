@@ -160,6 +160,10 @@
                 <div id="cardContainer" class="card-container">
                     
                 </div>
+
+                <!-- Modal -->
+                <div id="gameModal" class="modal">
+                </div>
             </section>
     
             <!-- SECTION CONTACTO -->
@@ -222,5 +226,43 @@
     
     <!-- JS -->
     <script type="module" src="main.js"></script>
+
+    <script>
+        function getGame(idGame) {
+            fetch(`https://nintendofirebase-default-rtdb.firebaseio.com/Switchgames/${idGame}.json`)
+                .then(response => response.json())
+                .then(data => {
+                    const modalContent = `
+                        <article class="card-modal">
+                            <h2 class="card-title-modal">${data.name}</h2>
+                            <div class="img-container-modal">
+                                <img class="img-modal" src="${data.imgPortrait}" alt="Imagen de ${data.name}">
+                                <p>Género: ${data.genre}</p>
+                                <p>Desarrollador: ${data.developer}</p>
+                                <p>Fecha de lanzamiento: ${data.releaseDate}</p>
+                            </div>
+                            <span style="margin:0" class="close" onclick="closeModal()">&times;</span>
+                        </article>`;
+
+                    document.getElementById('gameModal').innerHTML = modalContent;
+                    
+                    openModal();
+
+                    return data;
+                });
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('gameModal');
+            modal.style.display = 'none';
+        }
+
+        function openModal() {
+        const modal = document.getElementById('gameModal');
+        modal.style.display = 'block';
+        }
+  </script>
+
+
 </body>
 </html>

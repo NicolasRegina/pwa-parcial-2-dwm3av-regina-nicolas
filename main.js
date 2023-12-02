@@ -91,6 +91,7 @@ async function cargarJuegos() {
 
           const article = document.createElement('article');
           article.className = 'card';
+          article.setAttribute('onclick', `getGame('${idGame}')`);
 
           const topDiv = document.createElement('div');
           topDiv.className = 'top';
@@ -126,17 +127,52 @@ async function cargarJuegos() {
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        // Llamar a la función para cargar las características y los juegos al cargar la página
-        cargarCaracteristicas();
-        cargarJuegos();
-      } else {
-        // User is signed out
-        window.location.replace('home.html');
-      }
-    });
+// function getGame(idGame) {
+//   fetch(`https://nintendofirebase-default-rtdb.firebaseio.com/Switchgames/${idGame}.json`)
+//       .then(response => response.json())
+//       .then(data => {
+//           const modalContent = `
+//               <article class="card-modal">
+//                   <h2 class="card-title-modal">${data.name}</h2>
+//                   <div class="img-container-modal">
+//                       <img class="img-modal" src="${data.imgPortrait}" alt="Imagen de ${data.name}">
+//                       <p>Género: ${data.genre}</p>
+//                       <p>Desarrollador: ${data.developer}</p>
+//                       <p>Fecha de lanzamiento: ${data.releaseDate}</p>
+//                   </div>
+//                   <span style="margin:0" class="close" onclick="closeModal()">&times;</span>
+//               </article>`;
 
+//           document.getElementById('gameModal').innerHTML = modalContent;
+          
+//           openModal();
+
+//           return data;
+//       });
+// }
+
+// function closeModal() {
+//   const modal = document.getElementById('gameModal');
+//   modal.style.display = 'none';
+// }
+
+// function openModal() {
+//   const modal = document.getElementById('gameModal');
+//   modal.style.display = 'block';
+// }
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  onAuthStateChanged(auth, (user) => {
+      if (user) {
+          // Llamar a la función para cargar las características y los juegos al cargar la página
+          cargarCaracteristicas();
+          cargarJuegos();
+          //getGame(1);
+      } else {
+          // User is signed out
+          window.location.replace('home.html');
+      }
+  });
 });
+
