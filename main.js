@@ -25,14 +25,65 @@ if ('serviceWorker' in navigator) {
         .catch(err => console.warn('Error al tratar de registrar el sw', err))
 }
 
+// Función para hacer la solicitud a la API y generar los elementos <article>
+async function cargarJuegos() {
+  try {
+      const response = await fetch('https://nintendofirebase-default-rtdb.firebaseio.com/Switchgames.json');
+      const data = await response.json();
+
+      if (!response.ok) {
+          throw new Error(data.message || 'Error al obtener los datos de la API');
+      }
+
+      const cardContainer = document.getElementById('cardContainer');
+
+      // Iterar sobre los datos y crear elementos <article> dinámicamente
+      for (const idGame in data) {
+          const juego = data[idGame];
+
+          const article = document.createElement('article');
+          article.className = 'card';
+
+          const topDiv = document.createElement('div');
+          topDiv.className = 'top';
+
+          const iconoSwitch = document.createElement('img');
+          iconoSwitch.src = 'img/icon-white.png';
+          iconoSwitch.alt = 'Icono Switch';
+
+          const titulo = document.createElement('h3');
+          titulo.className = 'card-title';
+          titulo.textContent = juego.name;
+
+          topDiv.appendChild(iconoSwitch);
+          topDiv.appendChild(titulo);
+
+          const imgContainer = document.createElement('div');
+          imgContainer.className = 'img-container';
+
+          const imgJuego = document.createElement('img');
+          imgJuego.className = 'img';
+          imgJuego.src = juego.imgPortrait;
+          imgJuego.alt = 'Portada juego ' + juego.name;
+
+          imgContainer.appendChild(imgJuego);
+
+          article.appendChild(topDiv);
+          article.appendChild(imgContainer);
+
+          cardContainer.appendChild(article);
+      }
+  } catch (error) {
+      console.error('Error:', error.message || error);
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/auth.user
-        //const uid = user.uid;
-        // ...
+        // Llamar a la función para cargar los juegos al cargar la página
+        cargarJuegos();
       } else {
         // User is signed out
         window.location.replace('home.html');
