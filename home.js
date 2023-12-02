@@ -33,8 +33,25 @@ function login() {
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
-            console.error('Error al loguear:', errorCode, errorMessage);
-            alert('Error al loguear' + errorMessage);
+        
+            console.error('Error al loguear:', errorCode);
+        
+            let alertMessage = 'Error al loguear: ' + errorMessage;
+        
+            // Personalizar el mensaje de alerta según el tipo de error
+            switch (errorCode) {
+                case 'auth/invalid-email':
+                    alertMessage = 'Correo electrónico no válido. Verifica el formato del correo electrónico.';
+                    break;
+                case 'auth/user-not-found':
+                    alertMessage = 'Usuario no encontrado. Verifica el correo electrónico.';
+                    break;
+                case 'auth/wrong-password':
+                    alertMessage = 'Contraseña incorrecta. Verifica tu contraseña.';
+                    break;
+            }
+        
+            alert(alertMessage);
         });
 }
 
