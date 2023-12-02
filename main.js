@@ -25,7 +25,55 @@ if ('serviceWorker' in navigator) {
         .catch(err => console.warn('Error al tratar de registrar el sw', err))
 }
 
-// Función para hacer la solicitud a la API y generar los elementos <article>
+// Función para hacer la solicitud el GET a la API y cargar las características
+async function cargarCaracteristicas() {
+  try {
+      const response = await fetch('https://nintendofirebase-default-rtdb.firebaseio.com/switchCharacteristics.json');
+      const data = await response.json();
+
+      if (!response.ok) {
+          throw new Error(data.message || 'Error al obtener los datos de la API');
+      }
+
+      const characteristicsContainer = document.getElementById('caracteristicasContainer');
+
+      // Iterar sobre los datos y crear elementos <article> dinámicamente
+      for (const idCharacteristics in data) {
+          const characteristics = data[idCharacteristics];
+
+          const article = document.createElement('article');
+          article.className = 'card';
+
+          const titulo = document.createElement('h3');
+          titulo.className = 'card-title';
+          titulo.textContent = characteristics.title;
+
+          const imgContainer = document.createElement('div');
+          imgContainer.className = 'img-container';
+
+          const imgCaracteristica = document.createElement('img');
+          imgCaracteristica.className = 'img';
+          imgCaracteristica.src = characteristics.imgPortrait;
+          imgCaracteristica.alt = 'Imagen de la característica: ' + characteristics.title;
+
+          imgContainer.appendChild(imgCaracteristica);
+
+          const parrafo = document.createElement('p');
+          parrafo.className = 'contenedor-texto';
+          parrafo.innerHTML = characteristics.description;
+
+          article.appendChild(titulo);
+          article.appendChild(imgContainer);
+          article.appendChild(parrafo);
+
+          characteristicsContainer.appendChild(article);
+      }
+  } catch (error) {
+      console.error('Error:', error.message || error);
+  }
+}
+
+// Función para hacer la solicitud el GET a la API y cargar los juegos 
 async function cargarJuegos() {
   try {
       const response = await fetch('https://nintendofirebase-default-rtdb.firebaseio.com/Switchgames.json');
@@ -82,7 +130,8 @@ document.addEventListener('DOMContentLoaded', () => {
     
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        // Llamar a la función para cargar los juegos al cargar la página
+        // Llamar a la función para cargar las características y los juegos al cargar la página
+        cargarCaracteristicas();
         cargarJuegos();
       } else {
         // User is signed out
