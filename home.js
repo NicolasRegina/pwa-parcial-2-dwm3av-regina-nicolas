@@ -27,13 +27,14 @@ function login() {
             // Signed in 
             const user = userCredential.user;
             console.log('Usuario logueado', user);
-            
-            // TODO redirigir a index.html
+            alert('Usuario logueado');
+            window.location.replace('index.html');
         })
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
             console.error('Error al loguear:', errorCode, errorMessage);
+            alert('Error al loguear' + errorMessage);
         });
 }
 
