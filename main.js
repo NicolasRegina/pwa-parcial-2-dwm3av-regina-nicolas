@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js";
+import { getStorage } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-storage.js";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -16,6 +17,8 @@ appId: "1:548790770216:web:cc7f4e2f66f6314881b31d"
 const app = initializeApp(firebaseConfig);
 // Autenticación Firebase
 const auth = getAuth(app);
+// Initialize Storage
+const storage = getStorage(app);
 
 //Service Worker
 if ('serviceWorker' in navigator) {
@@ -160,6 +163,55 @@ async function cargarJuegos() {
 //   const modal = document.getElementById('gameModal');
 //   modal.style.display = 'block';
 // }
+
+const getImageData = (e) => {
+  const file = e.target.files[0];
+  const reader = new FileReader();
+  reader.readAsDataURL(file);
+  reader.onload = () => {
+      const imgPreview = document.getElementById('imgPreview');
+      console.log(imgPreview);
+      imgPreview.src = reader.result;
+      imgPreview.style.display = 'block';
+  }
+}
+
+const uploadImage = () => {
+  const storageRef = storage.ref().child("img/juegos");
+  const folderRef = storageRef.child(fileName);
+  const uploadtask = folderRef.put(file);
+  uploadtask.on(
+    "state_changed",
+    (snapshot) => {
+      console.log("Snapshot", snapshot.ref.name);
+      progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      progress = Math.round(progress);
+      progressbar.style.width = progress + "%";
+      progressbar.innerHTML = progress + "%";
+      uploadedFileName = snapshot.ref.name;
+    },
+    (error) => {
+      console.log(error);
+    },
+    () => {
+      storage
+        .ref("img/juegos")
+        .child(uploadedFileName)
+        .getDownloadURL()
+        .then((url) => {
+          console.log("URL", url);
+          if (!url) {
+            img.style.display = "none";
+          } else {
+            img.style.display = "block";
+            loading.style.display = "none";
+          }
+          img.setAttribute("src", url);
+        });
+      console.log("File Uploaded Successfully");
+    }
+  );
+};
 
 document.addEventListener('DOMContentLoaded', () => {
 

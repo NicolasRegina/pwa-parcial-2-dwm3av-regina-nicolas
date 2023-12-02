@@ -45,7 +45,7 @@
                     <li><a href="#modos">Modos de Juego</a></li>
                     <li><a href="#joycon">Joy‑Con™</a></li>
                     <li><a href="#juegos">Juegos</a></li>
-                    <li><a href="#contacto">Contacto</a></li>
+                    <li><a href="#contacto">Tu Juego</a></li>
                 </ul>
             </nav>
         </header>
@@ -169,28 +169,32 @@
             <!-- SECTION CONTACTO -->
             <section class="form-contacto">
     
-                <img src="img/mario_and_friends.png" alt="Mario y sus amigos saludando">
-        
+                <div class="imgContainer">
+                    <img src="img/cartucho.png" alt="Cartucho de Nintendo Switch vacío">
+                    <img id="imgPreview" class="imgPreview" alt="Vista previa de la imagen">
+                </div>
+
+
                 <div class="contact">
         
-                    <h2 id="contacto" class="form_title">Formulario de contacto</h2>
+                    <h2 id="contacto" class="form_title">Agrega tu propio juego</h2>
                     <p class="contenedor-texto">
-                        ¡Únete a nuestra comunidad y mantente al día con todas las novedades de Nintendo!
-                        Suscríbete a nuestro newsletter y sé el primero en recibir noticias, actualizaciones y contenido exclusivo sobre nuestros juegos y eventos.
-                        No te pierdas ninguna información importante, <strong>regístrate hoy mismo</strong> y únete a la emoción de ser parte de nuestra comunidad global.
+                        Piensas que falta algún juego exclusivo en la lista? No te preocupes! Puedes agregarlo tu mismo.
                     </p>
         
                     <form class="contact_form">
         
-                        <input type="text" name="name" placeholder="Ingresa tu Nombre" class="input" required>
+                        <input type="text" name="name" placeholder="Ingresa Nombre del Juego" class="input" required>
+
+                        <input type="file" id="inputImg" accept="image/*" name="imgPortrait" onchange="getImageData(event)" class="input" required>
                     
-                        <input type="email" name="email" placeholder="Ingresa tu Email" class="input" required>
+                        <input type="text" name="developer" placeholder="Ingresa el Desarrollador" class="input">
     
-                        <input type="tel" name="tel" placeholder="Ingresa tu Teléfono" class="input" required>
+                        <input type="text" name="releaseDate" placeholder="Ingresa la Fecha de Lanzamiento" class="input">
                     
-                        <textarea name="comment" class="input" placeholder="Comentarios?"></textarea>
+                        <input type="text" name="genre" placeholder="Ingresa el Genero del Juego" class="input">
                         
-                        <button class="input send_input" type="submit">Suscribirse</button>
+                        <button class="input send_input" type="submit">Aceptar</button>
         
                     </form>
         
@@ -227,6 +231,7 @@
     <!-- JS -->
     <script type="module" src="main.js"></script>
 
+    <!-- Modal JS -->
     <script>
         function getGame(idGame) {
             fetch(`https://nintendofirebase-default-rtdb.firebaseio.com/Switchgames/${idGame}.json`)
@@ -261,8 +266,84 @@
         const modal = document.getElementById('gameModal');
         modal.style.display = 'block';
         }
-  </script>
+    </script>
 
+    <!-- UPLOAD IMG -->
+    <script>
+        // import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
+        // import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js";
+        // import { getStorage } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-storage.js";
+
+        // // Your web app's Firebase configuration
+        // const firebaseConfig = {
+        // apiKey: "AIzaSyAISRqC75mWLE-e9tSDwiXkZZDKvQ8kaxQ",
+        // authDomain: "nintendofirebase.firebaseapp.com",
+        // projectId: "nintendofirebase",
+        // storageBucket: "nintendofirebase.appspot.com",
+        // messagingSenderId: "548790770216",
+        // appId: "1:548790770216:web:cc7f4e2f66f6314881b31d"
+        // };
+
+        // // Initialize Firebase
+        // const app = initializeApp(firebaseConfig);
+        // // Autenticación Firebase
+        // const auth = getAuth(app);
+        // // Initialize Storage
+        // const storage = getStorage(app);
+
+        const getImageData = (e) => {
+            const file = e.target.files[0];
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => {
+                const imgPreview = document.getElementById('imgPreview');
+                console.log(imgPreview);
+                imgPreview.src = reader.result;
+                imgPreview.style.display = 'block';
+            }
+
+            //uploadImage(file);
+        }
+
+        // const uploadImage = (file) => {
+        //     // Obtén una referencia al servicio de almacenamiento de Firebase
+        //     const storageRef = firebase.storage().ref();
+
+        //     // Crea una referencia a la ubicación donde deseas almacenar la imagen (en este caso, la carpeta "img/juegos")
+        //     const folderRef = storageRef.child("img/juegos");
+
+        //     // Genera un nombre único para el archivo
+        //     const fileName = Date.now() + "_" + file.name;
+
+        //     // Crea una referencia al archivo en Firebase Storage
+        //     const fileRef = folderRef.child(fileName);
+
+        //     // Sube el archivo
+        //     fileRef.put(file).then(() => {
+        //         // Obtenemos la URL de la imagen después de cargarla
+        //         fileRef.getDownloadURL().then((url) => {
+        //             // Aquí puedes realizar acciones adicionales con la URL, como actualizar la base de datos
+        //             updateDatabase(url, fileName);
+        //         });
+        //     }).catch((error) => {
+        //         console.error("Error al subir la imagen:", error);
+        //     });
+        // }
+
+        // const updateDatabase = (imageUrl, fileName) => {
+        //     // Aquí puedes realizar acciones adicionales, como actualizar la base de datos con la URL de la imagen
+        //     console.log("URL de la imagen:", imageUrl);
+        //     console.log("Nombre del archivo:", fileName);
+
+        //     // Ejemplo: Actualizar la base de datos con la URL de la imagen
+        //     // firebase.database().ref('tu/ruta/en/la/base/de/datos').update({
+        //     //     imagenUrl: imageUrl,
+        //     //     otroCampo: 'otroValor'
+        //     // });
+
+        //     alert("Imagen subida y base de datos actualizada");
+        // }
+    </script>
 
 </body>
 </html>

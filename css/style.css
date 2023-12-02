@@ -325,7 +325,7 @@ article .contenedor-texto{
 }
 
 
-/*SECTION CONTACTO*/
+/*SECTION AGREGA TU JUEGO*/
 
 .form-contacto{
     margin: auto;
@@ -344,7 +344,7 @@ article .contenedor-texto{
 
 .form-contacto img{
     margin: auto;
-    width: 80%;
+    width: 400px;
     max-width: 60vw;
 }
 
@@ -390,6 +390,20 @@ article .contenedor-texto{
     background-color: #EA2222;
     color: #fff;
     font-weight: 600;
+}
+
+.imgContainer {
+    position: relative;
+}
+
+.imgPreview {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ajuste del contenido */
+    display: none; /* Ocultar por defecto */
 }
 
 /*SECTION NICOLAS - FOOTER*/
