@@ -94,7 +94,7 @@ async function cargarJuegos() {
 
           const article = document.createElement('article');
           article.className = 'card';
-          article.setAttribute('onclick', `getGame('${idGame}')`);
+          article.setAttribute('onclick', `window.getGame('${idGame}')`);
 
           const topDiv = document.createElement('div');
           topDiv.className = 'top';
@@ -130,39 +130,41 @@ async function cargarJuegos() {
   }
 }
 
-// function getGame(idGame) {
-//   fetch(`https://nintendofirebase-default-rtdb.firebaseio.com/Switchgames/${idGame}.json`)
-//       .then(response => response.json())
-//       .then(data => {
-//           const modalContent = `
-//               <article class="card-modal">
-//                   <h2 class="card-title-modal">${data.name}</h2>
-//                   <div class="img-container-modal">
-//                       <img class="img-modal" src="${data.imgPortrait}" alt="Imagen de ${data.name}">
-//                       <p>Género: ${data.genre}</p>
-//                       <p>Desarrollador: ${data.developer}</p>
-//                       <p>Fecha de lanzamiento: ${data.releaseDate}</p>
-//                   </div>
-//                   <span style="margin:0" class="close" onclick="closeModal()">&times;</span>
-//               </article>`;
+function getGame(idGame) {
+  fetch(`https://nintendofirebase-default-rtdb.firebaseio.com/Switchgames/${idGame}.json`)
+      .then(response => response.json())
+      .then(data => {
+          const modalContent = `
+              <article class="card-modal">
+                  <h2 class="card-title-modal">${data.name}</h2>
+                  <div class="img-container-modal">
+                      <img class="img-modal" src="${data.imgPortrait}" alt="Imagen de ${data.name}">
+                      <p>Género: ${data.genre}</p>
+                      <p>Desarrollador: ${data.developer}</p>
+                      <p>Fecha de lanzamiento: ${data.releaseDate}</p>
+                  </div>
+                  <span style="margin:0" class="close" onclick="closeModal()">&times;</span>
+              </article>`;
 
-//           document.getElementById('gameModal').innerHTML = modalContent;
+          document.getElementById('gameModal').innerHTML = modalContent;
           
-//           openModal();
+          openModal();
 
-//           return data;
-//       });
-// }
+          return data;
+      });
+}
 
-// function closeModal() {
-//   const modal = document.getElementById('gameModal');
-//   modal.style.display = 'none';
-// }
+window.getGame = getGame;
 
-// function openModal() {
-//   const modal = document.getElementById('gameModal');
-//   modal.style.display = 'block';
-// }
+function closeModal() {
+  const modal = document.getElementById('gameModal');
+  modal.style.display = 'none';
+}
+
+function openModal() {
+  const modal = document.getElementById('gameModal');
+  modal.style.display = 'block';
+}
 
 const getImageData = (e) => {
   const file = e.target.files[0];
@@ -220,7 +222,7 @@ document.addEventListener('DOMContentLoaded', () => {
           // Llamar a la función para cargar las características y los juegos al cargar la página
           cargarCaracteristicas();
           cargarJuegos();
-          //getGame(1);
+          // getGame(1);
       } else {
           // User is signed out
           window.location.replace('home.html');

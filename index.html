@@ -227,35 +227,32 @@
             </section>
         </footer>		
     </div>
-    
-    <!-- JS -->
-    <script type="module" src="main.js"></script>
 
     <!-- Modal JS -->
     <script>
-        function getGame(idGame) {
-            fetch(`https://nintendofirebase-default-rtdb.firebaseio.com/Switchgames/${idGame}.json`)
-                .then(response => response.json())
-                .then(data => {
-                    const modalContent = `
-                        <article class="card-modal">
-                            <h2 class="card-title-modal">${data.name}</h2>
-                            <div class="img-container-modal">
-                                <img class="img-modal" src="${data.imgPortrait}" alt="Imagen de ${data.name}">
-                                <p>Género: ${data.genre}</p>
-                                <p>Desarrollador: ${data.developer}</p>
-                                <p>Fecha de lanzamiento: ${data.releaseDate}</p>
-                            </div>
-                            <span style="margin:0" class="close" onclick="closeModal()">&times;</span>
-                        </article>`;
+        // function getGame(idGame) {
+        //     fetch(`https://nintendofirebase-default-rtdb.firebaseio.com/Switchgames/${idGame}.json`)
+        //         .then(response => response.json())
+        //         .then(data => {
+        //             const modalContent = `
+        //                 <article class="card-modal">
+        //                     <h2 class="card-title-modal">${data.name}</h2>
+        //                     <div class="img-container-modal">
+        //                         <img class="img-modal" src="${data.imgPortrait}" alt="Imagen de ${data.name}">
+        //                         <p>Género: ${data.genre}</p>
+        //                         <p>Desarrollador: ${data.developer}</p>
+        //                         <p>Fecha de lanzamiento: ${data.releaseDate}</p>
+        //                     </div>
+        //                     <span style="margin:0" class="close" onclick="closeModal()">&times;</span>
+        //                 </article>`;
 
-                    document.getElementById('gameModal').innerHTML = modalContent;
+        //             document.getElementById('gameModal').innerHTML = modalContent;
                     
-                    openModal();
+        //             openModal();
 
-                    return data;
-                });
-        }
+        //             return data;
+        //         });
+        // }
 
         function closeModal() {
             const modal = document.getElementById('gameModal');
@@ -344,6 +341,9 @@
         //     alert("Imagen subida y base de datos actualizada");
         // }
     </script>
+
+    <!-- JS -->
+    <script type="module" src="main.js"></script>
 
 </body>
 </html>
